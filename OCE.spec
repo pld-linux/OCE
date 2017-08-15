@@ -2,13 +2,14 @@
 #
 Summary:	OpenCASCADE Community Edition
 Name:		OCE
-Version:	0.16.1
+Version:	0.18.2
 Release:	1
 License:	LGPLv2 with exception
 Group:		Applications/Engineering
 URL:		https://github.com/tpaviot/oce
 Source0:	https://github.com/tpaviot/oce/archive/%{name}-%{version}.tar.gz
-# Source0-md5:	4d591b240c9293e879f50d86a0cb2bb3
+# Source0-md5:	6dfd68e459e2c62387579888a867281f
+Patch0:		oce-build.patch
 Source1:	DRAWEXE.1
 Source2:	opencascade-draw.desktop
 Source3:	oce-256.png
@@ -147,6 +148,7 @@ OpenCASCADE CAE platform library development files
 
 %prep
 %setup -q -n oce-%{name}-%{version}
+%patch0 -p1
 
 %build
 install -d build
@@ -214,11 +216,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files foundation
 %defattr(644,root,root,755)
-%doc AUTHORS LICENSE_LGPL_21.txt NEWS OCCT_LGPL_EXCEPTION.txt
+%doc AUTHORS.md LICENSE_LGPL_21.txt NEWS.md OCCT_LGPL_EXCEPTION.txt
 # Foundation
 %attr(755,root,root) %{_libdir}/libTKernel.so.*
 %attr(755,root,root) %{_libdir}/libTKMath.so.*
-%attr(755,root,root) %{_libdir}/libTKAdvTools.so.*
 %{_datadir}/oce-*.*/
 
 %files modeling
