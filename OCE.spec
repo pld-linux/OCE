@@ -3,7 +3,7 @@
 Summary:	OpenCASCADE Community Edition
 Name:		OCE
 Version:	0.18.2
-Release:	1
+Release:	2
 License:	LGPLv2 with exception
 Group:		Applications/Engineering
 URL:		https://github.com/tpaviot/oce
@@ -113,6 +113,7 @@ OpenCASCADE CAE DRAW test harness.
 %package devel
 Summary:	OpenCASCADE CAE platform library development files
 Group:		Development/Libraries
+Requires:	%{name}-draw = %{version}-%{release}
 Requires:	%{name}-foundation = %{version}-%{release}
 Requires:	%{name}-modeling = %{version}-%{release}
 Requires:	%{name}-ocaf = %{version}-%{release}
