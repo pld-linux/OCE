@@ -1,15 +1,18 @@
-%bcond_without	tests
+#
+# Conditional build:
+%bcond_without	tests		# build with tests
+%bcond_with	tbb		# Use tbb for multithreading
+%bcond_without	openmp		# Use openmp for multithreading
 #
 Summary:	OpenCASCADE Community Edition
 Name:		OCE
-Version:	0.18.2
-Release:	2
+Version:	0.18.3
+Release:	1
 License:	LGPLv2 with exception
 Group:		Applications/Engineering
 URL:		https://github.com/tpaviot/oce
 Source0:	https://github.com/tpaviot/oce/archive/%{name}-%{version}.tar.gz
-# Source0-md5:	6dfd68e459e2c62387579888a867281f
-Patch0:		oce-build.patch
+# Source0-md5:	1686393c8493bbbb2f3f242330b33cba
 Source1:	DRAWEXE.1
 Source2:	opencascade-draw.desktop
 Source3:	oce-256.png
@@ -26,7 +29,8 @@ BuildRequires:	Mesa-libGLU-devel
 BuildRequires:	ftgl-devel
 BuildRequires:	gl2ps-devel
 BuildRequires:	libgomp
-BuildRequires:	tbb-devel
+%{?with_openmp:BuildRequires:	libopenmpt-devel}
+%{?with_tbb:BuildRequires:	tbb-devel}
 BuildRequires:	tcl-devel
 BuildRequires:	tk-devel
 BuildRequires:	xorg-lib-libXScrnSaver-devel
@@ -149,7 +153,6 @@ OpenCASCADE CAE platform library development files
 
 %prep
 %setup -q -n oce-%{name}-%{version}
-%patch0 -p1
 
 %build
 install -d build
@@ -159,7 +162,7 @@ cd build
 		-DOCE_INSTALL_LIB_DIR=%{_lib} \
 		-DOCE_WITH_FREEIMAGE=ON \
 		-DOCE_WITH_GL2PS=ON \
-		-DOCE_MULTITHREAD_LIBRARY:STRING=TBB \
+		-DOCE_MULTITHREAD_LIBRARY:STRING=%{?with_tbb:TBB}%{!?with_tbb:%{?with_openmp:OPENMP}%{!?with_openmp:NONE}} \
 		-DOCE_DRAW=ON \
 		-DOCE_TESTING=ON \
 		../
