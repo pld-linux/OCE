@@ -7,7 +7,7 @@
 Summary:	OpenCASCADE Community Edition
 Name:		OCE
 Version:	0.18.3
-Release:	1
+Release:	2
 License:	LGPLv2 with exception
 Group:		Applications/Engineering
 URL:		https://github.com/tpaviot/oce
@@ -45,7 +45,6 @@ BuildRequires:	xorg-lib-libXrandr-devel
 BuildRequires:	xorg-lib-libXres-devel
 BuildRequires:	xorg-lib-libXtst-devel
 BuildRequires:	xorg-lib-libXv-devel
-BuildRequires:	xorg-lib-libXxf86misc-devel
 BuildRequires:	xorg-lib-libxkbfile
 BuildRequires:	xorg-proto-xproto-devel
 
